@@ -19,7 +19,7 @@ We see port 80 is hosting a website, so let's head over there and add `facts.htb
 The website seems to be hosting random facts about stuff. We see that there are people making comments, but we don't see an option to create an account, so lets try to find it.  
 At this point you could use a tool like `ffuf` to fuzz for directories, but i just tried `/admin` and got redirected to `/admin/login` which allows us to create an account, so let's make one.  
 <br>
-After making an account and loggin in, we see an admin dashboard, but we are very limited because we don't have admin privilages.  
+After making an account and logging in, we see an admin dashboard, but we are very limited because we don't have admin privilages.  
 At the bottom footer we see that the website is using `Camaleon CMS v2.9.0` a quick google search shows that this version is vulnerable to `CVE-2024-46987` (arbitrary file read) and `CVE-2025-2304` (authenticated user privilage escalation).  
 <br>
 ## Exploitation
@@ -89,7 +89,7 @@ After literally 5 minutes, we get a hit.
 Let's try to ssh into the machine.  
 `william` is not working, so let's try `trivia`.
 ```bash
-sh -i id_ed25519 trivia@facts.htb
+ssh -i id_ed25519 trivia@facts.htb
 Enter passphrase for key 'id_ed25519':
 ```
 We successfully logged in.  
