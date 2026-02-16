@@ -75,7 +75,7 @@ Let's check python version
 wacky@wingdata:~$ python3 --version
 Python 3.12.3
 ```
-Searching goole for `python 3.12.3 tar exploit` leads us to [this](https://github.com/google/security-research/security/advisories/GHSA-hgqp-3mmf-7h8f)
+Searching google for `python 3.12.3 tar exploit` leads us to [this](https://github.com/google/security-research/security/advisories/GHSA-hgqp-3mmf-7h8f)
 ## Getting Root
 After a lot of trial and error with the script I mentioned earlier, I couldn't get it to work, so I dug deeper and found [this](https://github.com/DesertDemons/CVE-2025-4138-4517-POC). Let's download the exploit to the target machine.
 ```bash
