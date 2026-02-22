@@ -5,4 +5,4 @@ Currently contains:
  - Facts (easy)
  - Pterodactyl (medium)
  - WingData (easy)
- - Interpreter (medium) SOON
+ - Interpreter (medium)
