@@ -6,3 +6,5 @@ Currently contains:
  - Pterodactyl (medium)
  - WingData (easy)
  - Interpreter (medium)
+ - Pirate (hard) - soon
+ - CCTV (easy) - soon
