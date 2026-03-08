@@ -61,7 +61,7 @@ We can login as `admin:X1l9fx1ZjS7RZb`. We find that the `motionEye` version is 
 Executing can be a bit tricky:  
 1. First open `localhost:8765` press `F12` and go to console. Then type in `configUiValid = function() { return true; };`
 2. Open settings tab on the website and go to `still images`, set `capture mode` to `interval snapshots` and interval time to `10`
-3. Paste the payload into `filename` section and press apply
+3. Paste the payload into `filename` section and press apply  
 Example payload:
 ```bash
 $(touch /tmp/test).%Y-%m-%d-%H-%M-%S
