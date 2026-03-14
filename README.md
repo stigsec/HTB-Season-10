@@ -8,3 +8,4 @@ Currently contains:
  - Interpreter (medium)
  - Pirate (hard) - soon
  - CCTV (easy)
+ - VariaType (medium) - soon
