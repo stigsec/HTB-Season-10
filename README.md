@@ -6,6 +6,7 @@ Currently contains:
  - Pterodactyl (medium)
  - WingData (easy)
  - Interpreter (medium)
- - Pirate (hard) - soon
+ - Pirate (hard) - **NOT** soon
  - CCTV (easy)
- - VariaType (medium) - soon
+ - VariaType (medium)
+ - Kobold (easy)
