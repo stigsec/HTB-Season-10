@@ -10,3 +10,4 @@ Currently contains:
  - CCTV (easy)
  - VariaType (medium)
  - Kobold (easy)
+ - Silentium (easy)
