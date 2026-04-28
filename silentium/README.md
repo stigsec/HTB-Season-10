@@ -95,7 +95,7 @@ user.txt
 ```
 ## ROOT
 System enumeration showed that `gogs` is running (ports 3000/3001) and is vulnerable to [CVE-2025-8110](https://github.com/zAbuQasem/gogs-CVE-2025-8110)  
-But the script di not work fo rme, so I decided to exploit thos manually  
+But the script did not work for me, so I decided to exploit this manually  
 1. `ssh -L 8080:127.0.0.1:3001 ben@silentium.htb`
 2. Go to `http://127.0.0.1:8080` and register a new account
 3. Go to `User settings` > `Applications` and generate a new token
