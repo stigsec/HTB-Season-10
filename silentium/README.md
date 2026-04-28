@@ -13,7 +13,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 Let's add `silentium.htb` to our `/etc/hosts`.
 After `fuzzing` for `VHOSTS`, I found a `staging` VHOST, so we also need to add it to our `/etc/hosts`.  
 After opening up the `staging` VHOST we see that it's powered by `FLOWISE`.  
-A few google searcher later, we now know that `FLOWISE` often exposes it's `API` so let's try and use that to find out the version  
+A few google searches later, we know that `FLOWISE` often exposes it's `API` so let's try and use that to find out the version  
 ```bash
 curl -X GET http://staging.silentium.htb/api/v1/version
 {"version":"3.0.5"}
